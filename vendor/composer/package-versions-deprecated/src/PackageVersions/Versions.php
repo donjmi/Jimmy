@@ -23,7 +23,7 @@ final class Versions
      * @deprecated please use {@see self::rootPackageName()} instead.
      *             This constant will be removed in version 2.0.0.
      */
-    const ROOT_PACKAGE_NAME = '__root__';
+    const ROOT_PACKAGE_NAME = 'donjmi/snowtricks';
 
     /**
      * Array of all available composer packages.
@@ -125,6 +125,7 @@ final class Versions
   'symfony/var-exporter' => 'v5.3.3@903c2c0babd6267de5bcb2995e8fc1efb5f01f1f',
   'symfony/web-link' => 'v5.3.3@820cd4e31c1b5b440bd2e3c01d3e2583fa8472a2',
   'symfony/yaml' => 'v5.3.3@485c83a2fb5893e2ff21bf4bfc7fdf48b4967229',
+  'symfonycasts/reset-password-bundle' => 'v1.9.1@775e847613737f55cf06c6a7457f4bcf8ce258e5',
   'symfonycasts/verify-email-bundle' => 'v1.5.0@8c21aa9aa6b7123afed213e72485e8dad75e5dcf',
   'twig/extra-bundle' => 'v3.3.1@e12a8ee63387abb83fb7e4c897663bfb94ac22b6',
   'twig/twig' => 'v3.3.2@21578f00e83d4a82ecfa3d50752b609f13de6790',
@@ -164,10 +165,10 @@ final class Versions
   'symfony/phpunit-bridge' => 'v5.3.3@d7d3193df3b198f287777b61ef06cd59fdb0516d',
   'symfony/web-profiler-bundle' => 'v5.3.2@8feb731cfc248cce5c0ac6eeba63ec4923c6a264',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'symfony/polyfill-ctype' => '*@f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
-  'symfony/polyfill-iconv' => '*@f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
-  'symfony/polyfill-php72' => '*@f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
-  '__root__' => 'dev-master@f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
+  'symfony/polyfill-ctype' => '*@',
+  'symfony/polyfill-iconv' => '*@',
+  'symfony/polyfill-php72' => '*@',
+  'donjmi/snowtricks' => '0.1.1@',
 );
 
     private function __construct()
