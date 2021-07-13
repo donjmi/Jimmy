@@ -1,16 +1,25 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'v5.3.99',
-    'version' => '5.3.99.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
-    'name' => 'symfony/website-skeleton',
+    'reference' => 'f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
+    'name' => '__root__',
   ),
   'versions' => 
   array (
+    '__root__' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
+    ),
     'composer/package-versions-deprecated' => 
     array (
       'pretty_version' => '1.11.99.2',
@@ -442,8 +451,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache-implementation' => 
@@ -1274,15 +1283,6 @@
       ),
       'reference' => '8feb731cfc248cce5c0ac6eeba63ec4923c6a264',
     ),
-    'symfony/website-skeleton' => 
-    array (
-      'pretty_version' => 'v5.3.99',
-      'version' => '5.3.99.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
     'symfony/yaml' => 
     array (
       'pretty_version' => 'v5.3.3',
@@ -1291,6 +1291,15 @@
       array (
       ),
       'reference' => '485c83a2fb5893e2ff21bf4bfc7fdf48b4967229',
+    ),
+    'symfonycasts/verify-email-bundle' => 
+    array (
+      'pretty_version' => 'v1.5.0',
+      'version' => '1.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8c21aa9aa6b7123afed213e72485e8dad75e5dcf',
     ),
     'theseer/tokenizer' => 
     array (
