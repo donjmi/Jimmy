@@ -24,25 +24,16 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => '0.1.1',
+    'version' => '0.1.1.0',
     'aliases' => 
     array (
     ),
-    'reference' => 'f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
-    'name' => '__root__',
+    'reference' => NULL,
+    'name' => 'donjmi/snowtricks',
   ),
   'versions' => 
   array (
-    '__root__' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'f1c73d6624d9de5fa8f5a42e3e6a891b2c3c3285',
-    ),
     'composer/package-versions-deprecated' => 
     array (
       'pretty_version' => '1.11.99.2',
@@ -195,6 +186,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '56070bebac6e77230ed7d306ad13528e60732871',
+    ),
+    'donjmi/snowtricks' => 
+    array (
+      'pretty_version' => '0.1.1',
+      'version' => '0.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
     ),
     'egulias/email-validator' => 
     array (
@@ -1314,6 +1314,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '485c83a2fb5893e2ff21bf4bfc7fdf48b4967229',
+    ),
+    'symfonycasts/reset-password-bundle' => 
+    array (
+      'pretty_version' => 'v1.9.1',
+      'version' => '1.9.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '775e847613737f55cf06c6a7457f4bcf8ce258e5',
     ),
     'symfonycasts/verify-email-bundle' => 
     array (
