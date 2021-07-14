@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
 
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success" role="alert">{{ message }}</div>
+	{% endfor %}
+
+	<div class="example-wrapper">
+		<section class="jumbotron">
+			<div class="row vertical-center" style="height: 600px;">
+				<h1>Choose your best Tricks</h1>
+			</div>
+			<div class="row d-flex justify-content-end">
+				<a href="#zone_a_pointer">
+					<i class="fas fa-arrow-circle-down " data-toggle="collapse" href="#collapseExample" style="font-size: 40px;"></i>
+				</a>
+			</div>
+		</section>
+		<div class="collapse" id="collapseExample">
+			<div class="container justify-content-center">
+				<h2>Last tricks</h2>
+			</div>
+
+		</div>
+
+	</div>
 {% endblock %}
+
