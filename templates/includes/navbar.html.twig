@@ -1,0 +1,43 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+	<a class="navbar-brand" href="{{ path('app_home') }}">SnowTricks</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('app_home') }}">
+					<i class="fas fa-home"></i>
+					Home
+					<span class="sr-only">(current)</span>
+				</a>
+				{# <a class="nav-link" href="{{ path('home') }}"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a> #}
+			</li>
+			{% if app.user %}
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path("trick_new") }}">
+							<i class="fas fa-snowboarding"></i>
+							new Tricks</a>
+						{# <a class="nav-link" href="{{ path('trick.index') }}"><i class="fas fa-snowboarding"></i> Tricks</a> #}
+					</li>
+				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path("app_logout") }}">logout</a>
+				</li>
+				<li
+					class="nav-item mt-2">
+					{# <a class="badge badge-light">{{ app.user.username }}</a> #}
+					<a class="badge badge-light"></a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path("app_login") }}">Sign in</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path("app_register") }}">Sign up</a>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
+</nav>
