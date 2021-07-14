@@ -1,0 +1,35 @@
+.jumbotron {
+    background: url(/media/images/snowboarding.jpg) no-repeat center top;
+    background-size: cover;
+    border-radius: unset;
+}
+
+.jumbotron h1 {
+    color: white;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert {
+    padding: 10px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    border: none;
+}
+
+.alert-success {
+    background-color: green;
+}
+
+.alert-info {
+    background-color: rgb(128, 0, 75);
+}
+
+.alert-error {
+    background-color: red;
+}
