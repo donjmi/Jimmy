@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My profil
+{% endblock %}
+
+{% block body %}
+	<div class="col-sm-6">
+		<div class="card-header h4">
+			{{ app.user.pseudo }}
+		</div>
+		<div class="up">(dernière mise à jour le
+			{{ app.user.updatedAt |date('d/m/y H:m:s', 'Europe/Paris') }}
+			)
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">Email :
+				{{ app.user.email }}</h5>
+			<div class="card-text">
+				<a href="{{ path('user_profil_update') }}">Modifier mon profile</a>
+
+				|
+				<a href="{{ path('app_forgot_password_request') }}">Changer mon mot de passe</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
