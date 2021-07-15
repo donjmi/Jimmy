@@ -3,7 +3,9 @@
 {% block title %}My Profil
 {% endblock %}
 
-{% block body %}
-	<h1>Edit User</h1>
-	{{ include('user/profile/_form.html.twig', {'button_label': 'Update'}) }}
+{% block content %}
+	<div class="col-md-6 mx-auto">
+		<h1 class="mb-5">Edit User</h1>
+		{{ include('user/profile/_form.html.twig', {'button_label': 'Update'}) }}
+	</div>
 {% endblock %}

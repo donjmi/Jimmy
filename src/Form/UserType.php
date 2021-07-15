@@ -16,10 +16,10 @@ class UserType extends AbstractType
             ->add('roles')
             ->add('password')
             ->add('pseudo')
+            ->add('avatarFile')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('isVerified')
-        ;
+            ->add('isVerified');
     }
 
     public function configureOptions(OptionsResolver $resolver)
