@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserProfilType;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/user")
@@ -67,7 +68,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('users', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/edit.html.twig', [
@@ -111,10 +112,10 @@ class UserController extends AbstractController
 
             $this->addFlash('success', 'Votre profil a été modifié !');
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('users');
         }
 
-        return $this->render('user/profil/edit.html.twig', [
+        return $this->render('user/profile/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }
