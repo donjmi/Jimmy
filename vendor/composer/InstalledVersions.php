@@ -241,6 +241,15 @@ private static $installed = array (
       ),
       'reference' => '848d8125239d7dbf8ab25cb7f054f1a630e68c2e',
     ),
+    'jms/metadata' => 
+    array (
+      'pretty_version' => '2.5.0',
+      'version' => '2.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b5c52549807b2d855b3d7e36ec164c00eb547338',
+    ),
     'laminas/laminas-code' => 
     array (
       'pretty_version' => '4.4.2',
@@ -1386,6 +1395,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '21578f00e83d4a82ecfa3d50752b609f13de6790',
+    ),
+    'vich/uploader-bundle' => 
+    array (
+      'pretty_version' => '1.18.0',
+      'version' => '1.18.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c5250c8d6a072960250ce5130e68a5693b3b48dd',
     ),
     'webmozart/assert' => 
     array (
