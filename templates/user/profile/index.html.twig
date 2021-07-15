@@ -8,6 +8,7 @@
 
 	<div class="col-md-6 mx-auto">
 		<div class="card-header h4">
+			<img src="{{ vich_uploader_asset(app.user, 'avatarFile') }}" alt="{{ app.user.pseudo }}">
 			{{ app.user.pseudo }}
 		</div>
 		<div class="up">(dernière mise à jour :
