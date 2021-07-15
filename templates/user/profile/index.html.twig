@@ -1,14 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'profile.html.twig' %}
 
 {% block title %}My profil
 {% endblock %}
 
-{% block body %}
-	<div class="col-sm-6">
+{% block content %}
+
+
+	<div class="col-md-6 mx-auto">
 		<div class="card-header h4">
 			{{ app.user.pseudo }}
 		</div>
-		<div class="up">(dernière mise à jour le
+		<div class="up">(dernière mise à jour lefhdhdhdhj
 			{{ app.user.updatedAt |date('d/m/y H:m:s', 'Europe/Paris') }}
 			)
 		</div>
