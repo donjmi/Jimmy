@@ -1,8 +1,8 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '0.1.1',
-    'version' => '0.1.1.0',
+    'pretty_version' => '0.1.3',
+    'version' => '0.1.3.0',
     'aliases' => 
     array (
     ),
@@ -56,6 +56,15 @@
       ),
       'reference' => 'a036d90c303f3163b5be8b8fde9b6755b2be4a3a',
     ),
+    'doctrine/data-fixtures' => 
+    array (
+      'pretty_version' => '1.5.0',
+      'version' => '1.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '51d3d4880d28951fff42a635a2389f8c63baddc5',
+    ),
     'doctrine/dbal' => 
     array (
       'pretty_version' => '2.13.2',
@@ -82,6 +91,15 @@
       array (
       ),
       'reference' => '4202ce675d29e70a8b9ee763bec021b6f44caccb',
+    ),
+    'doctrine/doctrine-fixtures-bundle' => 
+    array (
+      'pretty_version' => '3.4.0',
+      'version' => '3.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '870189619a7770f468ffb0b80925302e065a3b34',
     ),
     'doctrine/doctrine-migrations-bundle' => 
     array (
@@ -166,8 +184,8 @@
     ),
     'donjmi/snowtricks' => 
     array (
-      'pretty_version' => '0.1.1',
-      'version' => '0.1.1.0',
+      'pretty_version' => '0.1.3',
+      'version' => '0.1.3.0',
       'aliases' => 
       array (
       ),
@@ -190,6 +208,15 @@
       array (
       ),
       'reference' => '006aa5d32f887a4db4353b13b5b5095613e0611f',
+    ),
+    'fzaninotto/faker' => 
+    array (
+      'pretty_version' => 'v1.9.2',
+      'version' => '1.9.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '848d8125239d7dbf8ab25cb7f054f1a630e68c2e',
     ),
     'laminas/laminas-code' => 
     array (
