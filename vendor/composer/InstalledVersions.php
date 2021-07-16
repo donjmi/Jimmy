@@ -241,6 +241,15 @@ private static $installed = array (
       ),
       'reference' => '848d8125239d7dbf8ab25cb7f054f1a630e68c2e',
     ),
+    'imagine/imagine' => 
+    array (
+      'pretty_version' => '1.2.4',
+      'version' => '1.2.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd2e18be6e930ca169e4f921ef73ebfc061bf55d8',
+    ),
     'jms/metadata' => 
     array (
       'pretty_version' => '2.5.0',
@@ -258,6 +267,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '54251ab2b16c41c6980387839496b235f5f6e10b',
+    ),
+    'liip/imagine-bundle' => 
+    array (
+      'pretty_version' => '2.6.1',
+      'version' => '2.6.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '00f3ccfccb33834b44f82c17cca80bfd83882bb3',
     ),
     'monolog/monolog' => 
     array (
