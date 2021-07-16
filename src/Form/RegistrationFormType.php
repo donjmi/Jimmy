@@ -59,7 +59,7 @@ class RegistrationFormType extends AbstractType
                 'download_label' => '...',
                 'download_uri' => true,
                 'image_uri' => true,
-                // 'imagine_pattern' => '...',
+                'imagine_pattern' => 'avatar',
                 // 'asset_helper' => true
             ]);
     }
