@@ -63,7 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $avatar;
