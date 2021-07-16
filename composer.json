@@ -1,7 +1,7 @@
 {
     "name": "donjmi/snowtricks",
     "description": "projet n° 6 SnowTricks Symfony OPC ",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
