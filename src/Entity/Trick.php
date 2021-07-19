@@ -53,6 +53,7 @@ class Trick
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->publishedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
