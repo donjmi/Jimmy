@@ -7,7 +7,22 @@
 {% block body %}
 	<div class="container">
 		<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
-
+		<div class="row mt-5">
+			{% for picture in trick.pictures %}
+				{# <div class="card border-0 col-md-2 col-sm-12 mt-4 mb-4"> #}
+				<div class="card mb-4 mr-3" style="max-width:10rem">
+					<img src="{{ asset('/media/images/tricks/' ~ picture.name)|imagine_filter('trick') }}" alt="{{ trick.name }}" style=" max-width:10rem"/>
+					<div class="row" style="max-width:10rem">
+						<a href="{{ path('picture_edit', {id: trick.id}) }}">
+							<i class="far fa-edit"></i>
+						</a>
+						<a href="{{ path('tricks_delete_picture', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">
+							<i class="fas fa-trash"></i>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 
 		<div class="row mt-5 mb-4 justify-content-center">
 			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">Category:
@@ -39,10 +54,10 @@
 						{% for comment in trick.comments %}
 							<div class="card mb-2">
 								<div class="card-header">
-									{% if comment.user.avatar is null or comment.user.avatar is empty %}
+									{% if comment.user.avatar is null or comment.user.avatar is empty  %}
 										<img src="/media/images/defaultAvatar.jpg" style="width:25px"/>
 									{% else %}
-										<img src=" {{ vich_uploader_asset(app.user, 'avatarFile') | imagine_filter('comment') }} ">
+										<img src=" {{ vich_uploader_asset(comment.user, 'avatarFile') | imagine_filter('comment') }} ">
 									{% endif %}
 									{{ comment.user.pseudo }}
 									({{ comment.postedAt|date("d/m/Y H:m:s")  }}
