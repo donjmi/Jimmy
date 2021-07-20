@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Picture{% endblock %}
+
+{% block body %}
+    <h1>Picture</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ picture.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ picture.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('picture_index') }}">back to list</a>
+
+    <a href="{{ path('picture_edit', {'id': picture.id}) }}">edit</a>
+
+    {{ include('picture/_delete_form.html.twig') }}
+{% endblock %}
