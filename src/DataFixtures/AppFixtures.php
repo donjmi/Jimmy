@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setEmail(sprintf("email+%d@snowtrick.fr", $u));
             $user->setPseudo($faker->firstName($gender = 'male' | 'female'));
-            $user->setAvatar($faker->imageUrl($width = 50, $height = 50));
+            // $user->setAvatar($faker->imageUrl($width = 50, $height = 50));
 
 
             if ($u === 1)
