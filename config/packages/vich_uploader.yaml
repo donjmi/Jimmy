@@ -12,5 +12,14 @@ vich_uploader:
            upload_destination: '%kernel.project_dir%/public/media/avatars'
            namer: vich_uploader.namer_origname
 
+        #    delete_on_update: true
+        #    delete_on_remove: true
+
+       trick_images:
+           uri_prefix: /media/images
+           upload_destination: '%kernel.project_dir%/public/media/images'
+           namer: vich_uploader.namer_origname
+
            delete_on_update: true
            delete_on_remove: true
+
