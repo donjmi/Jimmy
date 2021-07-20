@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Entity\Comment;
+use App\Entity\Picture;
 use App\Form\TrickType;
 use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -49,6 +51,25 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pictures = $form->get('picture')->getData();
+
+            // On boucle sur les images
+            foreach ($pictures as $picture) {
+                // On génère un nouveau nom de fichier
+                $file = md5(uniqid()) . '.' . $picture->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $picture->move(
+                    $this->getParameter('pictures_directory'),
+                    $file
+                );
+
+                // On crée l'image dans la base de données
+                $pic = new Picture();
+                $pic->setName($file);
+                $trick->addPicture($pic);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -120,5 +141,31 @@ class TrickController extends AbstractController
         }
 
         return $this->redirectToRoute('trick_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/delete/picture/{id}", name="tricks_delete_picture", methods={"DELETE"})
+     */
+    public function deletePicture(Picture $picture, Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        // On vérifie si le token est valide
+        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $data['_token'])) {
+            // On récupère le nom de l'image
+            $nom = $picture->getName();
+            // On supprime le fichier
+            unlink($this->getParameter('pictures_directory') . '/' . $nom);
+
+            // On supprime l'entrée de la base
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($picture);
+            $entityManager->flush();
+
+            // On répond en json
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
     }
 }
