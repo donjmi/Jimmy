@@ -24,8 +24,8 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '0.1.3',
-    'version' => '0.1.3.0',
+    'pretty_version' => '0.1.4',
+    'version' => '0.1.4.0',
     'aliases' => 
     array (
     ),
@@ -207,8 +207,8 @@ private static $installed = array (
     ),
     'donjmi/snowtricks' => 
     array (
-      'pretty_version' => '0.1.3',
-      'version' => '0.1.3.0',
+      'pretty_version' => '0.1.4',
+      'version' => '0.1.4.0',
       'aliases' => 
       array (
       ),

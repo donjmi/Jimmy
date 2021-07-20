@@ -175,7 +175,7 @@ final class Versions
   'symfony/polyfill-ctype' => '*@',
   'symfony/polyfill-iconv' => '*@',
   'symfony/polyfill-php72' => '*@',
-  'donjmi/snowtricks' => '0.1.3@',
+  'donjmi/snowtricks' => '0.1.4@',
 );
 
     private function __construct()

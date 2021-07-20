@@ -1,38 +1,65 @@
 {% extends 'base.html.twig' %}
+{% form_theme formComment 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}Trick{% endblock %}
+{% block title %}Trick
+{% endblock %}
 
 {% block body %}
-    <h1>Trick</h1>
+	<div class="container">
+		<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trick.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ trick.name }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ trick.content }}</td>
-            </tr>
-            <tr>
-                <th>PublishedAt</th>
-                <td>{{ trick.publishedAt ? trick.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('trick_index') }}">back to list</a>
+		<div class="row mt-5 mb-4 justify-content-center">
+			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">Category:
+				{{ trick.category.name }}</button>
+			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">posted :
+				{{ trick.publishedAt ? trick.publishedAt|date('d-m-Y H:i:s') : '' }}</button>
+			{% if trick.updatedAt %}
+				<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">updatedAt:
+					{{ trick.updatedAt ? trick.updatedAt|date('d-m-Y H:i:s') : '' }}</button>
+			{% endif %}
+		</div>
 
-    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+		{% block comment %}
+			<div class="container">
+				{% if app.user %}
+					{{ form_start(formComment) }}
+					{{ form_widget(formComment) }}
+					<button class="btn btn-primary">{{ button_label|default('Save your comment') }}</button>
+					{{ form_end(formComment) }}
+				{% else %}
+					<a class="nav-link" href="{{ path("app_login") }}">
+						<i class="fas fa-sign-in-alt"></i>
+						Connect you to post
+					</a>
+				{% endif %}
+				<section>
+					<hr>
+					<ul>
+						{% for comment in trick.comments %}
+							<div class="card mb-2">
+								<div class="card-header">
+									{% if comment.user.avatar is null or comment.user.avatar is empty %}
+										<img src="/media/images/defaultAvatar.jpg" style="width:25px"/>
+									{% else %}
+										<img src=" {{ vich_uploader_asset(app.user, 'avatarFile') | imagine_filter('comment') }} ">
+									{% endif %}
+									{{ comment.user.pseudo }}
+									({{ comment.postedAt|date("d/m/Y H:m:s")  }}
+									)
+								</div>
+								<div class="card-body">
+									<blockquote class="blockquote mb-0">
+										<p>{{ comment.content }}</p>
 
-    {{ include('trick/_delete_form.html.twig') }}
+									</blockquote>
+								</div>
+							</div>
+						{% endfor %}
+					</ul>
+
+				</section>
+			</div>
+		{% endblock %}
+	</div>
 {% endblock %}

@@ -8,7 +8,11 @@
 
 	<div class="col-md-6 mx-auto text-center">
 		<div class="card-header h4">
-			<img src="{{ vich_uploader_asset(app.user, 'avatarFile') | imagine_filter('avatar') }}" alt="{{ app.user.pseudo }}">
+			{% if app.user.avatar is null or app.user.avatar is empty  %}
+				<img src="/media/images/defaultAvatar.jpg" style="width:100px"/>
+			{% else %}
+				<img src=" {{ vich_uploader_asset(app.user, 'avatarFile') | imagine_filter('avatar') }} ">
+			{% endif %}
 			{{ app.user.pseudo }}
 		</div>
 		<div class="up">(dernière mise à jour :
@@ -18,8 +22,6 @@
 		<div class="card-body">
 			<h5 class="card-title">Email :
 				{{ app.user.email }}</h5>
-
-			<img src="{{ vich_uploader_asset(app.user, 'avatarFile') | imagine_filter('comment') }}" alt="{{ app.user.pseudo }}">
 			<div class="card-text">
 				<a href="{{ path('user_profil_update') }}">Modifier mon profile</a>
 
