@@ -10,8 +10,19 @@ $(document).ready(function () {
         e.preventDefault();
         $(".content:hidden").slice(0, 5).slideDown();
         if ($(".content:hidden").length == 0) {
-            // $("#loadMore2").text("No trick").addClass("noContent");
             $("#loadMore2").fadeOut("slow");
+        }
+    });
+})
+
+//******************* Load More Comment **********************//
+$(document).ready(function () {
+    $(".contentCom").slice(0, 2).show();
+    $("#loadMoreC").on("click", function (e) {
+        e.preventDefault();
+        $(".contentCom:hidden").slice(0, 2).slideDown();
+        if ($(".contentCom:hidden").length == 0) {
+            $("#loadMoreC").fadeOut("slow");
         }
     });
 })

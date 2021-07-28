@@ -51,7 +51,7 @@
 					<hr>
 					<ul>
 						{% for comment in trick.comments %}
-							<div class="card mb-2">
+							<div class="card mb-2 contentCom">
 								<div class="card-header">
 									{% if comment.user.avatar is null or comment.user.avatar is empty  %}
 										<img src="/media/images/defaultAvatar.jpg" style="width:25px"/>
@@ -71,8 +71,10 @@
 							</div>
 						{% endfor %}
 					</ul>
-
 				</section>
+				<div class="row mb-5 justify-content-center">
+					<button type="button" class="btn btn-outline-info" id="loadMoreC">Load More C</button>
+				</div>
 			</div>
 		{% endblock %}
 	</div>
