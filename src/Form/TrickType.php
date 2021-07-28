@@ -19,7 +19,7 @@ class TrickType extends AbstractType
         $builder
             ->add('picture', FileType::class, [
                 'required' => false,
-                'label' => false,
+                'label' => '+',
                 'mapped' => false,
                 'multiple' => true
             ])
