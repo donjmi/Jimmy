@@ -7,6 +7,8 @@
     height: 100%;
 } */
 
+/******************* home **********************/
+
 .jumbotron {
     background: url(/media/images/snowboarding.jpg) no-repeat center top;
     background-size: cover;
@@ -40,6 +42,8 @@
     justify-content: center;
 }
 
+/******************* message flash **********************/
+
 .alert {
     padding: 10px;
     color: white;
@@ -59,6 +63,8 @@
 .alert-error {
     background-color: red;
 }
+
+/******************* navbar & footer **********************/
 
 .footer {
     background-color: darkgrey;
@@ -86,13 +92,21 @@
     }
 }
 
-.content {
+/***************** load more *************/
+
+.content, .contentCom {
     display: none;
 }
 
 #loadMore2 {
     display: block;
 }
+
+#loadMoreC {
+    display: block;
+}
+
+/*******************  **********************/
 
 .haut {
     height: 100px;
@@ -105,6 +119,8 @@
     bottom: 20px;
     cursor: pointer
 }
+
+/*******************  **********************/
 
 .add_new_picture {
     margin-top: -400px;
