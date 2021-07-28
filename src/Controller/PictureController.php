@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Trick;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/picture")
@@ -83,12 +84,57 @@ class PictureController extends AbstractController
      */
     public function delete(Request $request, Picture $picture): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($picture);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('picture_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/delete/{id}-{mode}", name="picture_reset_main", methods={"GET"})
+     */
+    public function resetFieldMainImage(Request $request, Picture $picture, String $mode, trick $trick): Response
+    {
+        $picture->setStatut(false);
+        $this->getDoctrine()->getManager()->flush();
+
+        switch ($mode) {
+            case 'set':
+                $route = 'picture_edit';
+                $id = $picture->getId();
+                break;
+
+            default:
+                $route = 'trick_edit';
+                $id = $trick->getId();
+                break;
+        }
+
+        return $this->redirectToRoute($route, ["id" => $id], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/update/{id}-{mode}", name="picture_set_main", methods={"GET"})
+     */
+    public function pictureSetMmain(Request $request, Picture $picture, String $mode): Response
+    {
+
+        $picture->setStatut(true);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('trick_edit', ["id" => $picture->getTricks()->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/list/{id}", name="picture_list", methods={"GET"})
+     */
+    public function pictureList(PictureRepository $pictureRepository, Trick $trick): Response
+    {
+        return $this->render('picture/index2.html.twig', [
+            'pictures' => $pictureRepository->findByTricks($trick),
+        ]);
     }
 }

@@ -28,6 +28,11 @@ class Picture
      */
     private $tricks;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,5 +60,26 @@ class Picture
         $this->tricks = $tricks;
 
         return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getId();
     }
 }
