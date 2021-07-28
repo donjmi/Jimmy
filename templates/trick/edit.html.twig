@@ -7,31 +7,61 @@
 
 {% block body %}
 	<div class="container">
-		<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
+		<div>
+			{% set mainImage = trick.getPictureMainImage %}
+			{% if mainImage %}
+				<img class="Mimage" src="{{ asset('/media/images/tricks/' ~ mainImage.name)|imagine_filter('mainImage') }}" alt="{{ trick.name }}"/>
+				<div class="row">
+					<a href="{{ path('picture_reset_main', {id: mainImage.id, mode: 'set'}) }}">
+						<i class="far fa-edit"></i>
+					</a>
+					<a href="{{ path('picture_reset_main', {id: mainImage.id, mode: 'default'}) }}">
+						<i class="fas fa-trash"></i>
+					</a>
+				</div>
+			{% else %}
+				<img class="Mimage" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}"/>
+
+				<div class="row" style="max-width:10rem">
+					{% if trick.pictures %}
+						<a href="{{ path('picture_list', {id: trick.id}) }}">
+							<i class="far fa-edit"></i>
+						</a>
+					{% else %}
+						<a href="{{ path('picture_new', {id: trick.id}) }}">
+							<i class="far fa-edit"></i>
+						</a>
+					{% endif %}
+				</div>
+			{% endif %}
+
+		</div>
 		<div class="row mt-5">
 			{% for picture in trick.pictures %}
 				{# <div class="card border-0 col-md-2 col-sm-12 mt-4 mb-4"> #}
-				<div class="card mb-4 mr-3" style="max-width:10rem">
-					<img src="{{ asset('/media/images/tricks/' ~ picture.name)|imagine_filter('trick') }}" alt="{{ trick.name }}" style=" max-width:10rem"/>
-					<div class="row" style="max-width:10rem">
-						<a href="{{ path('picture_edit', {id: trick.id}) }}">
-							<i class="far fa-edit"></i>
-						</a>
-						<a href="{{ path('tricks_delete_picture', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">
-							<i class="fas fa-trash"></i>
-						</a>
+				<div class="card mb-3 mr-3 border-0 content" style="width:13rem">
+					<img class="card-img-top" style="height: 137px;" src="{{ asset('/media/images/tricks/' ~ picture.name)|imagine_filter('trick') }}" alt="{{ trick.name }}" style=" max-width:10rem"/>
+					<div class="card-body">
+						<div class="row vertical-center">
+							<a href="{{ path('picture_edit', {id: picture.id}) }}">
+								<i class="far fa-edit"></i>
+							</a>
+							<a href="{{ path('picture_delete', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</div>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
 
 		<div class="row mt-5 mb-4 justify-content-center">
-			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">Category:
+			<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark font-weight-bold" role="button" aria-pressed="true" style="width:300px">Category:
 				{{ trick.category.name }}</button>
-			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">posted :
+			<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark font-weight-bold" role="button" aria-pressed="true" style="width:300px">posted :
 				{{ trick.publishedAt ? trick.publishedAt|date('d-m-Y H:i:s') : '' }}</button>
 			{% if trick.updatedAt %}
-				<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">updatedAt:
+				<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark font-weight-bold" role="button" aria-pressed="true" style="width:300px">updatedAt:
 					{{ trick.updatedAt ? trick.updatedAt|date('d-m-Y H:i:s') : '' }}</button>
 			{% endif %}
 		</div>
@@ -42,15 +72,16 @@
 					{{ form_start(form) }}
 					<div class="row mb-4 justify-content-center">
 						{{ form_widget(form.name) }}
-
 					</div>
 					<div class="row mb-4 justify-content-center">
 						{{ form_widget(form.content) }}
-
 					</div>
 					<div class="row mb-4 justify-content-start" style="width:200px">
 						{{ form_widget(form.category) }}
-
+					</div>
+					<div class="row mb-4 justify-content-start" style="width:200px">
+						<div classe="add_new_picture">{{ form_label(form.picture) }}</div>
+						{{ form_widget(form.picture) }}
 					</div>
 					<div class="row mt-5 mb-4 justify-content-center">
 						<button class="btn btn-primary btn-sm mr-3" style="width:100px" type="submit">update</button>
@@ -67,6 +98,5 @@
 				<button class="btn btn-danger btn-sm mr-3" style="width:100px;margin-top: -250px;margin-left: -170px;">Delete</button>
 			</form>
 		</div>
-
 	{% endblock %}
-{% endblock %}
+</div>{% endblock %}

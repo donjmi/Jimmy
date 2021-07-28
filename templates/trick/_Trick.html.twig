@@ -1,13 +1,14 @@
-{% for row  in trick_first|batch(5) %}
-	<div class="row mb-1">
-		{% for trick in row %}
-			<div class="card mr-3 mb-3" style="width: 13rem;">
-				{# {% if trick.imageName %} #}
-				{# <img class="card-img-top" src="{{ vich_uploader_asset(trick)|imagine_filter('home_image') }}" alt="{{ trick.name }}"> #}
-				{# <img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
-																								{% else %} #}
-				<img
-				class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}"> {# {% endif %} #}
+{# <section class="container mt-5"> #}
+<div class="collapse" id="collapseExample">
+	<div class="row mb-1 md-12 sm-12">
+		{% for trick in tricks %}
+			<div class="card mr-3 mb-3 content mx-auto" style="width: 13rem;">
+				{% set mainImage = trick.getPictureMainImage %}
+				{% if mainImage %}
+					<img class="card-img-top" style="height: 137px;" src="{{ asset('/media/images/tricks/' ~ mainImage.name) }}" alt="{{ trick.name }}"/>
+				{% else %}
+					<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
+				{% endif %}
 				<div class="card-body">
 					<div class="row">
 						<div class="col-8">
@@ -34,49 +35,13 @@
 			</div>
 		{% endfor %}
 	</div>
-{% endfor %}
-
-<aside class="btn btn-primary" id="#hideMore" href="#MonCollapse" data-toggle="collapse" aria-expanded="false" aria-controls="MonCollapse">More tricks
-</aside>
-
-<section id="MonCollapse" class="collapse">
-	{% for row  in trick_last|batch(5) %}
-		<div class="row mb-3">
-			{% for trickL in row %}
-				<div class="card  mr-3" style="width: 13rem;">
-					<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trickL.name }}">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-8">
-								<p class="card-text">
-									<a href="{{ path('trick_show', {'id': trickL.id}) }}" class="text-decoration-none">{{ trickL.name }}</a>
-								</p>
-							</div>
-							<div class="col-4">
-								<div class="row" style="vertical-align: middle;">
-									<a href="{{ path('trick_edit', {'id': trickL.id}) }}">
-										<i class="fa fa-pencil fa-fw mt-1"></i>
-									</a>
-									<form method="post" action="{{ path('trick_delete', {'id': trickL.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trickL.id) }}">
-										<button class="btn btn-link delete" style="padding-top: 0px;">
-											<i class="fas fa-trash"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	{% endfor %}
-</section>
-
-<script>
-	$("aside").click(function (event) {
-event.preventDefault();
-$(this).hide();
-});
-</script>
+	<div class="row mb-5 justify-content-center">
+		<button type="button" class="btn btn-outline-info" id="loadMore2">Load More</button>
+	</div>
+	<div class="row">
+		<a href="#" classe="haut">
+			<i class="fas fa-arrow-circle-up fa-3x haut"></i>
+		</a>
+	</div>
+</div>
+{# </section> #}

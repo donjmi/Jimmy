@@ -189,4 +189,26 @@ class Trick
 
         return $this;
     }
+
+    public function getPictureMainImage()
+    {
+        $res = '';
+        $items = $this->getPictures();
+        foreach ($items as $key => $item) {
+            if ($item->getStatut()) {
+                $res = $item;
+                break;
+            }
+        }
+        return $res;
+    }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
 }
