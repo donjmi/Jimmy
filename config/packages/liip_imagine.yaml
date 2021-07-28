@@ -18,6 +18,12 @@ liip_imagine:
             trick:
                 filters:
                     thumbnail:
-                        size: [250, 250]
+                        size: [206, 137]
+                        mode: outbound
+                        allow_upscale: true
+            mainImage:
+                filters:
+                    thumbnail:
+                        size: [700, 600]
                         mode: outbound
                         allow_upscale: true
