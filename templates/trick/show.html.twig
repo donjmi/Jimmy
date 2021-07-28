@@ -6,31 +6,30 @@
 
 {% block body %}
 	<div class="container">
-		<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
+		{% set mainImage = trick.getPictureMainImage %}
+		{% if mainImage %}
+			<img class="card-img-top" src="{{ asset('/media/images/tricks/' ~ mainImage.name)|imagine_filter('mainImage') }}" alt="{{ trick.name }}"/>
+		{% else %}
+			<img class="card-img-top" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}">
+		{% endif %}
+
 		<div class="row mt-5">
 			{% for picture in trick.pictures %}
-				{# <div class="card border-0 col-md-2 col-sm-12 mt-4 mb-4"> #}
-				<div class="card mb-4 mr-3" style="max-width:10rem">
-					<img src="{{ asset('/media/images/tricks/' ~ picture.name)|imagine_filter('trick') }}" alt="{{ trick.name }}" style=" max-width:10rem"/>
-					<div class="row" style="max-width:10rem">
-						<a href="{{ path('picture_edit', {id: trick.id}) }}">
-							<i class="far fa-edit"></i>
-						</a>
-						<a href="{{ path('tricks_delete_picture', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">
-							<i class="fas fa-trash"></i>
-						</a>
+				<div class="card mr-2 mb-1 md-12 sm-12">
+					<div class="card-img-top">
+						<img src="{{ asset('/media/images/tricks/' ~ picture.name) }}" alt="{{ trick.name }}" style="width:10rem; height: 137px;"/>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
 
 		<div class="row mt-5 mb-4 justify-content-center">
-			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">Category:
+			<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark font-weight-bold" role="button" aria-pressed="true" style="width:300px">Category:
 				{{ trick.category.name }}</button>
-			<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">posted :
+			<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark font-weight-bold" role="button" aria-pressed="true" style="width:300px">posted :
 				{{ trick.publishedAt ? trick.publishedAt|date('d-m-Y H:i:s') : '' }}</button>
 			{% if trick.updatedAt %}
-				<button type="button" class="btn btn-outline-primary btn-sm mr-3" style="width:300px">updatedAt:
+				<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark font-weight-bold" role="button" aria-pressed="true" style="width:300px">updatedAt:
 					{{ trick.updatedAt ? trick.updatedAt|date('d-m-Y H:i:s') : '' }}</button>
 			{% endif %}
 		</div>
