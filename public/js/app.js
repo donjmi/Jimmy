@@ -2,3 +2,19 @@ $('.custom-file-input').on('change', function (e) {
     var inputFile = e.currentTarget;
     $(inputFile).parent().find('.custom-file-label').html(inputFile.files[0].name);
 });
+
+//******************* Load More Trick **********************//
+$(document).ready(function () {
+    $(".content").slice(0, 5).show();
+    $("#loadMore2").on("click", function (e) {
+        e.preventDefault();
+        $(".content:hidden").slice(0, 5).slideDown();
+        if ($(".content:hidden").length == 0) {
+            // $("#loadMore2").text("No trick").addClass("noContent");
+            $("#loadMore2").fadeOut("slow");
+        }
+    });
+})
+
+
+// alert('test app.js');
