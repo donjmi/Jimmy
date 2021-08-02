@@ -70,6 +70,7 @@ class TrickController extends AbstractController
                 // On crée l'image dans la base de données
                 $pic = new Picture();
                 $pic->setName($file);
+                $pic->setStatut(false);
                 $trick->addPicture($pic);
             }
 
