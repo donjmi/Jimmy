@@ -1,46 +1,47 @@
 {% block footer %}
-	<section class="row footer">
-		<span class="col text-left text-light">Copyright J.Ldonne</span>
-	</section>
-	<div class="navbarB  navbar d-md-none fixed-bottom">
-		<div class="col text-left">
-			<a href="/">
-				<i class="fas fa-home"></i>
-			</a>
-		</div>
-		{% if app.user %}
-			<div class="row">
-				{% if is_granted('ROLE_ADMIN') %}
-					<div class="col text-left">
-						<a href="{{ path('trick_create') }}">
-							<i class="fas fa-plus"></i>
-						</a>
-					</div>
-					<div class="col text-center">
-						<a href="{{ path('user') }}">
-							<i class="fas fa-user-cog"></i>
-						</a>
-					</div>
-				{% endif %}
-				<div class="col text-right">
-					<a href="{{ path('app_logout') }}">
-						<i class="fas fa-sign-out-alt"></i>
-					</a>
-				</div>
+    <section class="row footer align-items-center">
+        <div class="col text-left text-light pt-3 ml-5">
+            <p>
+                Copyright J.Ldonne
+            </p>
+        </div>
+    </section>
 
-			{% else %}
-				<div class="col text-right">
-					<a href="{{ path('app_register') }}">
-						<i class="far fa-user-circle"></i>
-					</a>
-				</div>
-
-				<div class="col text-right">
-					<a href="{{ path('app_login') }}">
-						<i class="fas fa-sign-in-alt"></i>
-					</a>
-				</div>
-			</div>
-		{% endif %}
-	</div>
+    <div class="navbarB navbar d-md-none fixed-bottom">
+        <div class="row justify-content-between">
+            <div class="col-4 text-left">
+                <a href="/">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            {% if app.user %}
+                <div class="col">
+                    <a href="{{ path('trick_new') }}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="{{ path('users') }}">
+                        <i class="fas fa-user-cog"></i>
+                    </a>
+                </div>
+                <div class="col text-right">
+                    <a href="{{ path('app_logout') }}">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            {% else %}
+                <div class="col-4 text-center">
+                    <a href="{{ path('app_register') }}">
+                        <i class="far fa-user-circle"></i>
+                    </a>
+                </div>
+                <div class="col-4 text-right">
+                    <a href="{{ path('app_login') }}">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

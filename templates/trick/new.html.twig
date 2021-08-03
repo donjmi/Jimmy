@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}New Trick{% endblock %}
 
 {% block body %}
-    <h1>Create new Trick</h1>
-
+<div class="container align-items-center mt-5">
+<h1 class="text-muted">New Trick</h1>
+    <div class="row">
     {{ include('trick/_form.html.twig') }}
-
-    <a href="{{ path('trick_index') }}">back to list</a>
+    </div>
+</div>
 {% endblock %}
