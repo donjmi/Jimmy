@@ -6,6 +6,7 @@ use App\Entity\Trick;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -96,20 +97,20 @@ class PictureController extends AbstractController
     /**
      * @Route("/delete/{id}-{mode}", name="picture_reset_main", methods={"GET"})
      */
-    public function resetFieldMainImage(Request $request, Picture $picture, String $mode, trick $trick): Response
+    public function resetFieldMainImage(Request $request, Picture $picture, String $mode): Response
     {
         $picture->setStatut(false);
         $this->getDoctrine()->getManager()->flush();
 
         switch ($mode) {
             case 'set':
-                $route = 'picture_edit';
-                $id = $picture->getId();
+                $route = 'picture_list';
+                $id = $picture->getTricks()->getId();
                 break;
 
             default:
                 $route = 'trick_edit';
-                $id = $trick->getId();
+                $id = $picture->getTricks()->getId();
                 break;
         }
 
@@ -136,5 +137,35 @@ class PictureController extends AbstractController
         return $this->render('picture/index2.html.twig', [
             'pictures' => $pictureRepository->findByTricks($trick),
         ]);
+    }
+
+    /**
+     * @Route("/modify/{id}", name="picture_modify")
+     */
+    public function updatePicture(Request $request, Picture $picture)
+    {
+        $form = $this->createForm(PictureType::class);
+        $form->handleRequest($request);
+        $fs = new Filesystem();
+        $pictures_directory = $this->getParameter('pictures_directory');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $fs->remove($pictures_directory . '/' . $picture->getName());
+            $pictureFile = $form->get('name')->getData();
+            $file = md5(uniqid()) . '.' . $pictureFile->guessExtension();
+            $pictureFile->move($pictures_directory, $file);
+
+            // $pic = new Picture();
+            $picture->setName($file);
+            $picture->setStatut(0);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->remove($oldName);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('trick_edit', ["id" => $picture->getTricks()->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('picture/_form.html.twig', ['form' => $form->createView()]);
     }
 }
