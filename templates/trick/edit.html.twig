@@ -6,11 +6,19 @@
 
 
 {% block body %}
-	<div class="container">
+<figure class="main">
+	<img src="/media/images/snowboarding.jpg" style="width:100%; height:600px;"
+		alt="" />
+</figure>
+	<div class="container zz pl-0 pr-0">
 		<div>
+			<div class="text-center">
+				<h2 class="Jim text-black"><b>{{ trick.name }}</b>
+				</h2>
+			</div>
 			{% set mainImage = trick.getPictureMainImage %}
 			{% if mainImage %}
-				<img class="Mimage" src="{{ asset('/media/images/tricks/' ~ mainImage.name)|imagine_filter('mainImage') }}" alt="{{ trick.name }}"/>
+				<img class="showImage" src="{{ asset('/media/images/tricks/' ~ mainImage.name)|imagine_filter('mainImage') }}" alt="{{ trick.name }}"/>
 				<div class="row">
 					<a href="{{ path('picture_reset_main', {id: mainImage.id, mode: 'set'}) }}">
 						<i class="far fa-edit"></i>
@@ -20,7 +28,7 @@
 					</a>
 				</div>
 			{% else %}
-				<img class="Mimage" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}"/>
+				<img class="showImage" src="/media/images/snowboarding.jpg" alt="{{ trick.name }}"/>
 
 				<div class="row" style="max-width:10rem">
 					{% if trick.pictures %}
@@ -43,10 +51,10 @@
 					<img class="card-img-top" style="height: 137px;" src="{{ asset('/media/images/tricks/' ~ picture.name)|imagine_filter('trick') }}" alt="{{ trick.name }}" style=" max-width:10rem"/>
 					<div class="card-body">
 						<div class="row vertical-center">
-							<a href="{{ path('picture_edit', {id: picture.id}) }}">
+							<a href="{{ path('picture_modify', {id: picture.id}) }}">
 								<i class="far fa-edit"></i>
 							</a>
-							<a href="{{ path('picture_delete', {id: picture.id})}}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}">
+							<a href="{{ path('tricks_delete_picture', {id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id ) }}">
 								<i class="fas fa-trash"></i>
 							</a>
 						</div>
