@@ -126,7 +126,8 @@ html, body {
 
 /***************** load more *************/
 
-.content, .contentCom {
+.content, 
+.contentCom {
     display: none;
 }
 
@@ -142,11 +143,6 @@ html, body {
 
 .add_new_picture {
     margin-top: -400px;
-}
-
-.Mimagexxx {
-    width: 1110px;
-    height: 400px;
 }
 
 #default {
