@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,9 +20,14 @@ class TrickType extends AbstractType
         $builder
             ->add('picture', FileType::class, [
                 'required' => false,
-                'label' => '+',
+                'label' => 'add images',
                 'mapped' => false,
                 'multiple' => true
+            ])
+            ->add('video', UrlType::class, [
+                'required' => false,
+                'label' => 'add video',
+                'mapped' => false,
             ])
             ->add('name', TextType::class, [
                 "label" => "Nom :"
