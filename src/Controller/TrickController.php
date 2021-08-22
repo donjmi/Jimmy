@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Video;
+use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Entity\Picture;
 use App\Form\TrickType;
@@ -10,7 +12,6 @@ use App\Form\CommentType;
 use App\Form\PictureType;
 use App\Repository\TrickRepository;
 use App\Repository\PictureRepository;
-use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,23 +57,34 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $pictures = $form->get('picture')->getData();
 
-            // On boucle sur les images
             foreach ($pictures as $picture) {
-                // On génère un nouveau nom de fichier
                 $file = md5(uniqid()) . '.' . $picture->guessExtension();
-
-                // On copie le fichier dans le dossier uploads
                 $picture->move(
                     $this->getParameter('pictures_directory'),
                     $file
                 );
 
-                // On crée l'image dans la base de données
                 $pic = new Picture();
                 $pic->setName($file);
                 $pic->setStatut(false);
                 $trick->addPicture($pic);
             }
+
+            $videos = new Video();
+            $newUrl = "";
+            $url = $form->get('video')->getData();
+
+            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $videoYoutube);
+            preg_match('%(?:https?://)?(?:www\.)?(?:dai\.ly/|dailymotion\.com(?:/video/|/embed/|/embed/video/))([^^&?/ ]{7})%i', $url, $videoDailymotion);
+            if (!empty($videoYoutube) || !empty($videoDailymotion)) {
+                if (!empty($videoYoutube)) {
+                    $newUrl = "https://www.youtube.com/embed/$videoYoutube[1]";
+                } elseif (!empty($videoDailymotion)) {
+                    $newUrl = "https://www.dailymotion.com/embed/video/$videoDailymotion[1]";
+                }
+            }
+            $videos->setUrl($newUrl);
+            $trick->addVideo($videos);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
@@ -104,8 +116,11 @@ class TrickController extends AbstractController
 
             return $this->redirectToRoute('trick_show', ["id" => $trick->getId()]);
         }
+
+        $Trickvideos = $trick->getVideos();
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'videos' => $Trickvideos,
             'formComment' => $form->createView()
         ]);
     }
@@ -121,25 +136,37 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pictures = $form->get('picture')->getData();
-
-            // On boucle sur les images
             foreach ($pictures as $picture) {
-                // On génère un nouveau nom de fichier
                 $file = md5(uniqid()) . '.' . $picture->guessExtension();
-
-                // On copie le fichier dans le dossier uploads
                 $picture->move(
                     $this->getParameter('pictures_directory'),
                     $file
                 );
 
-                // On crée l'image dans la base de données
                 $pic = new Picture();
                 $pic->setName($file);
                 $pic->setStatut(0);
                 $trick->addPicture($pic);
                 $trick->setUpdatedAt(new DateTimeImmutable());
             }
+
+            $videos = new Video();
+            $newUrl = "";
+            $url = $form->get('video')->getData();
+
+            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $youtubeMatch);
+            preg_match('%(?:https?://)?(?:www\.)?(?:dai\.ly/|dailymotion\.com(?:/video/|/embed/|/embed/video/))([^^&?/ ]{7})%i', $url, $videoDailymotion);
+            if (!empty($youtubeMatch) || !empty($videoDailymotion)) {
+                if (!empty($youtubeMatch)) {
+                    $newUrl = "https://www.youtube.com/embed/$youtubeMatch[1]";
+                } elseif (!empty($videoDailymotion)) {
+                    $newUrl = "https://www.dailymotion.com/embed/video/$videoDailymotion[1]";
+                }
+                $videos->setUrl($url);
+            }
+
+            $videos->setUrl($newUrl);
+            $trick->addVideo($videos);
             $trick->setUpdatedAt(new DateTimeImmutable());
             $this->getDoctrine()->getManager()->flush();
 
@@ -147,9 +174,11 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('trick_edit', ["id" => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
+        $Trickvideos = $trick->getVideos();
         return $this->renderForm('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form,
+            'videos' => $Trickvideos
         ]);
     }
 

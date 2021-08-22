@@ -6,11 +6,11 @@ $('.custom-file-input').on('change', function (e) {
 //******************* Load More Trick **********************//
 $(document).ready(function () {
     $(".content").slice(0, 5).show();
-    $("#loadMore2").on("click", function (e) {
+    $("#loadMore").on("click", function (e) {
         e.preventDefault();
         $(".content:hidden").slice(0, 5).slideDown();
         if ($(".content:hidden").length == 0) {
-            $("#loadMore2").fadeOut("slow");
+            $("#loadMore").fadeOut("slow");
         }
     });
 })
