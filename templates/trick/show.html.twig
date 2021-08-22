@@ -6,102 +6,104 @@ Trick
 {% endblock %}
 
 {% block content %}
-<figure class="main">
-	<img src="/media/images/snowboarding.jpg" style="width:100%; height:600px;"
-		alt="" />
-</figure>
-<div class="container zz pl-0 pr-0">
-	<div>
-		<div class="text-center">
-			<h2 class="Jim text-black"><b>{{ trick.name }}</b>
-			</h2>
-		</div>
-		{% set mainImage = trick.getPictureMainImage %}
-		{% if mainImage %}
-		<img class="showImage" src="{{ asset('/media/images/tricks/' ~
-			mainImage.name)|imagine_filter('mainImage') }}" alt="{{ trick.name }}" />
-		{% else %}
-		<img class="showImage" src="/media/images/snowboarding.jpg" alt="{{
-			trick.name }}">
-		{% endif %}
-	</div>
-	<div class="row mt-5 ml-0">
-		{% for picture in trick.pictures %}
-		<div class="card mr-2 mb-1 md-12 sm-12">
-			<div class="card-img-top">
-				<img src="{{ asset('/media/images/tricks/' ~ picture.name) }}" alt="{{
-					trick.name }}" style="width:10rem; height: 137px;" />
+	<figure class="mainHome">
+		<img src="/media/images/snowboarding.jpg" style="width:100%; height:600px;" alt="" />
+	</figure>
+	<div class="container trickBody mt-5 pl-0 pr-0">
+		<div>
+			{% set mainImage = trick.getPictureMainImage %}
+			{% if mainImage %}
+			<img class="showImage" src="{{ asset('/media/images/tricks/' ~
+				mainImage.name)|imagine_filter('mainImage') }}" alt="{{ trick.name }}" />
+			{% else %}
+			<img class="showImage" src="/media/images/snowboarding.jpg" alt="{{
+				trick.name }}">
+			{% endif %}
+				<div class="trickname">
+					<center><b class="text-white h1-responsive">{{ trick.name }}</b></center>
+				</div>
+			<div class="row mt-5 ml-0 d-flex justify-content-center">
+				{% for picture in trick.pictures %}
+				<div class="card mr-2 mb-1">
+					<div class="card-img-top">
+						<img class="trickMedias" src="{{ asset('/media/images/tricks/' ~ picture.name) }}" alt="{{
+						trick.name }}" style="width:10rem; height: 137px;" />
+					</div>
+				</div>
+				{% endfor %}
+				{% for video in videos %}
+				<div class="card mr-2 mb-1">
+					<iframe class="card-img-top trickMedias" src="{{ video.url }}"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+						style="width:10rem; height: 137px;">
+					</iframe>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="row mt-5 mb-4 justify-content-center">
+				<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark
+				font-weight-bold" role="button" aria-pressed="true" style="width:300px">
+					Category:{{ trick.category.name }}
+				</button>
+				<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark
+				font-weight-bold" role="button" aria-pressed="true" style="width:300px">
+					posted :{{ trick.publishedAt ? trick.publishedAt|date('d-m-Y H:i:s') : '' }}
+				</button>
+				{% if trick.updatedAt %}
+				<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark
+				font-weight-bold" role="button" aria-pressed="true" style="width:300px">
+					updatedAt:{{ trick.updatedAt ? trick.updatedAt|date('d-m-Y H:i:s') : '' }}
+				</button>
+				{% endif %}
+			</div>
+
+			{% if app.user %}
+			{{ form_start(formComment) }}
+			{{ form_widget(formComment) }}
+			<button class="btn btn-primary">
+				{{ button_label|default('Save your comment') }}
+			</button>
+			{{ form_end(formComment) }}
+			{% else %}
+			<a class="nav-link" href="{{ path('app_login') }}">
+				<i class="fas fa-sign-in-alt"></i>
+				Connect you to post
+			</a>
+			{% endif %}
+			{% endblock %}
+			{% block comment %}
+			<hr>
+			<i>({{ trick.comments|length }} comments exist)</i>
+			<ul>
+				{% for comment in trick.comments %}
+				<div class="card mb-2 contentCom">
+					<div class="card-header">
+						{% if comment.user.avatar is null or comment.user.avatar is
+						empty %}
+						<img src="/media/images/defaultAvatar.jpg" style="width:25px" />
+						{% else %}
+						<img src="{{ vich_uploader_asset(comment.user, 'avatarFile')
+						| imagine_filter('comment') }}">
+						{% endif %}
+						{{ comment.user.pseudo }}
+						( {{ comment.postedAt|date("d/m/Y H:m:s") }}
+						)
+					</div>
+					<div class="card-body">
+						<blockquote class="blockquote mb-0">
+							<p>
+								{{ comment.content }}
+							</p>
+						</blockquote>
+					</div>
+				</div>
+				{% endfor %}
+			</ul>
+			<div class="row mb-5 justify-content-center">
+				<button type="button" class="btn btn-outline-info" id="loadMoreC">
+					Load More
+				</button>
 			</div>
 		</div>
-		{% endfor %}
 	</div>
-
-	<div class="row mt-5 mb-4 justify-content-center">
-		<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark
-			font-weight-bold" role="button" aria-pressed="true" style="width:300px">
-			Category:{{ trick.category.name }}
-		</button>
-		<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark
-			font-weight-bold" role="button" aria-pressed="true" style="width:300px">
-			posted :{{ trick.publishedAt ? trick.publishedAt|date('d-m-Y H:i:s') : '' }}
-		</button>
-		{% if trick.updatedAt %}
-		<button class="btn btn-outline-primary btn-sm mr-3 disabled text-dark
-			font-weight-bold" role="button" aria-pressed="true" style="width:300px">
-			updatedAt:{{ trick.updatedAt ? trick.updatedAt|date('d-m-Y H:i:s') : '' }}
-		</button>
-		{% endif %}
-	</div>
-
-	{% if app.user %}
-	{{ form_start(formComment) }}
-	{{ form_widget(formComment) }}
-	<button class="btn btn-primary">
-		{{ button_label|default('Save your comment') }}
-	</button>
-	{{ form_end(formComment) }}
-	{% else %}
-	<a class="nav-link" href="{{ path("app_login") }}">
-		<i class="fas fa-sign-in-alt"></i>
-		Connect you to post
-	</a>
-	{% endif %}
-</div>
-{% endblock %}
-
-{% block comment %}
-<hr>
-
-	<i>({{ trick.comments|length }} comments exist)</i>
-
-<ul>
-	{% for comment in trick.comments %}
-	<div class="card mb-2 contentCom">
-		<div class="card-header">
-			{% if comment.user.avatar is null or comment.user.avatar is
-			empty %}
-			<img src="/media/images/defaultAvatar.jpg" style="width:25px" />
-			{% else %}
-			<img src="{{ vich_uploader_asset(comment.user, 'avatarFile')
-				| imagine_filter('comment') }}">
-			{% endif %}
-			{{ comment.user.pseudo }}
-			( {{ comment.postedAt|date("d/m/Y H:m:s") }}
-			)
-		</div>
-		<div class="card-body">
-			<blockquote class="blockquote mb-0">
-				<p>
-					{{ comment.content }}
-				</p>
-			</blockquote>
-		</div>
-	</div>
-	{% endfor %}
-</ul>
-<div class="row mb-5 justify-content-center">
-	<button type="button" class="btn btn-outline-info" id="loadMoreC">
-		Load More C
-	</button>
-</div>
 {% endblock %}
