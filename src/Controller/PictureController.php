@@ -90,7 +90,6 @@ class PictureController extends AbstractController
             $entityManager->remove($picture);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('picture_index', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -122,7 +121,6 @@ class PictureController extends AbstractController
      */
     public function pictureSetMmain(Request $request, Picture $picture, String $mode): Response
     {
-
         $picture->setStatut(true);
         $this->getDoctrine()->getManager()->flush();
 
@@ -155,17 +153,14 @@ class PictureController extends AbstractController
             $file = md5(uniqid()) . '.' . $pictureFile->guessExtension();
             $pictureFile->move($pictures_directory, $file);
 
-            // $pic = new Picture();
             $picture->setName($file);
             $picture->setStatut(0);
 
             $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->remove($oldName);
             $entityManager->flush();
 
             return $this->redirectToRoute('trick_edit', ["id" => $picture->getTricks()->getId()], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('picture/_form.html.twig', ['form' => $form->createView()]);
     }
 }
