@@ -1,5 +1,6 @@
-{% extends 'base.html.twig' %} {% block title %} Hello HomeController! {%
-endblock %} {% block body %}
+{% extends 'base.html.twig' %} 
+{% block title %} Hello HomeController! {% endblock %} 
+{% block body %}
 <i class="fas fa-arrow-circle-up fa-2x" onclick="topFunction()" id="myBtn" title="Go to top"></i>
 {% for message in app.flashes('success') %}
 <div class="alert alert-success" role="alert">
@@ -8,18 +9,18 @@ endblock %} {% block body %}
 {% endfor %}
 <section class="jumbotron text-center">
 	<h1 class="text-white">Choose your best Tricks</h1>
-
 	<div class="arrow-down">
 		<a href="#trickView">
-			<i class="fas fa-arrow-circle-down fa-3x" data-toggle="collapse" href="#viewT">
-			</i>
+			<i class="fas fa-arrow-circle-down fa-3x" data-toggle="collapse" href="#viewT"></i>
 		</a>
 	</div>
 </section>
 <div class="container justify-content-center" id="cible">
 	{% include 'trick/_trick.html.twig' %}
 </div>
-{% endblock %} {% block javascripts %}
+{% endblock %} 
+
+{% block javascripts %}
 <script>
 	//Get the button
 	var mybutton = document.getElementById("myBtn");
@@ -30,8 +31,8 @@ endblock %} {% block body %}
 
 	function scrollFunction() {
 		if (
-			document.body.scrollTop > 150 ||
-			document.documentElement.scrollTop > 150
+			document.body.scrollTop > 500 ||
+			document.documentElement.scrollTop > 500
 		) {
 			mybutton.style.display = "block";
 		} else {
