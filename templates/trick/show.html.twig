@@ -25,10 +25,7 @@ Trick
 			<div class="row mt-5 ml-0 d-flex justify-content-center">
 				{% for picture in trick.pictures %}
 				<div class="card mr-2 mb-1">
-					<div class="card-img-top">
-						<img class="trickMedias" src="{{ asset('/media/images/tricks/' ~ picture.name) }}" alt="{{
-						trick.name }}" style="width:10rem; height: 137px;" />
-					</div>
+					<img class="card-img-top trickMedias" src="{{ asset('/media/images/tricks/' ~ picture.name) }}" alt="{{ trick.name }}" style="width:10rem; height: 137px;" />
 				</div>
 				{% endfor %}
 				{% for video in videos %}
