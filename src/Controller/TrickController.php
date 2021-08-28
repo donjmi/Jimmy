@@ -90,7 +90,7 @@ class TrickController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
 
-            $this->addFlash('sucess', 'Trick successfully created');
+            $this->addFlash('success', 'Trick successfully created');
             return $this->redirectToRoute('trick_show', ["id" => $trick->getId()]);
         }
 
@@ -114,6 +114,7 @@ class TrickController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
+            $this->addFlash('sucess', 'Comment successfully created !');
             return $this->redirectToRoute('trick_show', ["id" => $trick->getId()]);
         }
 
@@ -132,7 +133,6 @@ class TrickController extends AbstractController
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pictures = $form->get('picture')->getData();
@@ -162,15 +162,14 @@ class TrickController extends AbstractController
                 } elseif (!empty($videoDailymotion)) {
                     $newUrl = "https://www.dailymotion.com/embed/video/$videoDailymotion[1]";
                 }
-                $videos->setUrl($url);
+                $videos->setUrl($newUrl);
+                $trick->addVideo($videos);
             }
 
-            $videos->setUrl($newUrl);
-            $trick->addVideo($videos);
             $trick->setUpdatedAt(new DateTimeImmutable());
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('sucess', 'Trick successfully updated !');
+            $this->addFlash('success', 'Trick successfully updated !');
             return $this->redirectToRoute('trick_edit', ["id" => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
@@ -191,6 +190,7 @@ class TrickController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($trick);
             $entityManager->flush();
+            
             $this->addFlash('info', 'Trick successfully deleted');
         }
 
@@ -215,6 +215,8 @@ class TrickController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($picture);
             $entityManager->flush();
+            
+            $this->addFlash('info', 'Picture successfully deleted');
 
             // On répond en json
             return new JsonResponse(['success' => 1]);
