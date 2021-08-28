@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\VideoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=VideoRepository::class)
+ * @UniqueEntity(fields={"url"}, message="oops !!! Video exist")
  */
 class Video
 {
