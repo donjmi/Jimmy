@@ -1,35 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Picture index{% endblock %}
+{% block title %}
+  Picture list
+{% endblock %}
 
-{% block body %}
-    <h1>Picture index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for picture in pictures %}
-            <tr>
-                <td>{{ picture.id }}</td>
-                <td>{{ picture.name }}</td>
-                <td>
-                    <a href="{{ path('picture_show', {'id': picture.id}) }}">show</a>
-                    <a href="{{ path('picture_edit', {'id': picture.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('picture_new') }}">Create new</a>
+{% block content %}
+  <div class="col-md-12 mt-5 mb-5">
+    <h1 class="text-muted h5">
+      Choice your main picture
+    </h1>
+    {% for picture in pictures %}
+      <div class="row">
+        <div class="col d-flex">
+          <div class="card mr-3" style="width: 10rem;">
+            <img class="card-img-top"
+              src="{{ asset(
+                '/media/images/tricks/' ~ picture.name
+              )|imagine_filter('avatar') }}"
+              alt="Card image cap" />
+            <div class="card-body mx-auto">
+              <p class="card-text">
+                <a href="{{
+                  path(
+                    'picture_set_main',
+                    {
+                      id: picture.id,
+                      mode: 'set'
+                    }
+                  )
+                  }}">
+                  <span style="font-size: 30px; color: Dodgerblue;">
+                    <i class="fas fa-check-circle"></i>
+                  </span>
+                </a>
+              </p>
+            </div>
+          </div>
+          {% else %}
+          <tr>
+            <td colspan="3">
+              no records found
+            </td>
+          </tr>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

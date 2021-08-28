@@ -1,45 +1,41 @@
 {% block footer %}
-<footer class="row footer">
-  <div class="col text-left text-light pt-3 ml-3">
-    <p>Copyright J.Ldonne</p>
-  </div>
-</footer>
+  <footer class="row footer">
+    <div class="col text-left text-light pt-3">
+      <p>
+        Copyright J.Ldonne
+      </p>
+    </div>
+  </footer>
 
-<div class="navbarB ">
-  <div class="row justify-content-between">
-    <div class="col-4 text-left">
-      <a href="/">
-        <i class="fas fa-home"></i>
-      </a>
+  <div class="navbarB">
+    <div class="row justify-content-between">
+      <div class="col-4 text-left">
+        <a href="/"><i class="fas fa-home"></i></a>
+      </div>
+      {% if app.user %}
+        <div class="col">
+          <a href="{{ path('trick_new') }}"><i class="fas fa-plus"></i></a>
+        </div>
+        <div class="col text-center">
+          <a href="{{ path('users') }}"><i class="fas fa-user-cog"></i></a>
+        </div>
+        <div class="col text-right">
+          <a href="{{ path('app_logout') }}">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </div>
+      {% else %}
+        <div class="col-4 text-center">
+          <a href="{{ path('app_register') }}">
+            <i class="far fa-user-circle"></i>
+          </a>
+        </div>
+        <div class="col-4 text-right">
+          <a href="{{ path('app_login') }}">
+            <i class="fas fa-sign-in-alt"></i>
+          </a>
+        </div>
+      {% endif %}
     </div>
-    {% if app.user %}
-    <div class="col">
-      <a href="{{ path('trick_new') }}">
-        <i class="fas fa-plus"></i>
-      </a>
-    </div>
-    <div class="col text-center">
-      <a href="{{ path('users') }}">
-        <i class="fas fa-user-cog"></i>
-      </a>
-    </div>
-    <div class="col text-right">
-      <a href="{{ path('app_logout') }}">
-        <i class="fas fa-sign-out-alt"></i>
-      </a>
-    </div>
-    {% else %}
-    <div class="col-4 text-center">
-      <a href="{{ path('app_register') }}">
-        <i class="far fa-user-circle"></i>
-      </a>
-    </div>
-    <div class="col-4 text-right">
-      <a href="{{ path('app_login') }}">
-        <i class="fas fa-sign-in-alt"></i>
-      </a>
-    </div>
-    {% endif %}
   </div>
-</div>
 {% endblock %}
