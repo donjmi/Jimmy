@@ -30,10 +30,10 @@ class TrickType extends AbstractType
                 'mapped' => false,
             ])
             ->add('name', TextType::class, [
-                "label" => "Nom :"
+                "label" => "Name :"
             ])
             ->add('content', TextareaType::class, [
-                "label" => "votre description :"
+                "label" => "Your description :"
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
