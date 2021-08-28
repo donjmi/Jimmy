@@ -41,7 +41,8 @@ class VideoController extends AbstractController
             $this->getDoctrine()
             ->getManager()
             ->flush();
-        
+
+            $this->addFlash('success', 'Video successfully updated');
             return $this->redirectToRoute('trick_edit', ["id" => $video->getTrick()->getId()], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,8 +60,8 @@ class VideoController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($video);
         $entityManager->flush();
-        $slug = $video->getTrick()->getId();
-
+        
+        $this->addFlash('info', 'Video successfully deleted');
         return $this->redirectToRoute('trick_edit', ["id" => $video->getTrick()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

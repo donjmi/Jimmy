@@ -91,4 +91,16 @@ class CommentController extends AbstractController
 
         return $this->redirectToRoute('comment_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+        * @Route("/delete/{id}", name="trick_comment_delete")
+        */
+        public function deleteVideo(Comment $comment)
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('trick_show', ["id" => $comment->getTrick()->getId()], Response::HTTP_SEE_OTHER);
+        }
 }

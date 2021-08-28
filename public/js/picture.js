@@ -5,12 +5,12 @@ window.onload = () => {
     // On boucle sur links
     for (link of links) {
         // On écoute le clic
-        link.addEventListener("click", function (e) {
+        link.addEventListener("click", function(e) {
             // On empêche la navigation
             e.preventDefault()
 
             // On demande confirmation
-            if (confirm("Voulez-vous supprimer cette image ?")) {
+            if (confirm("Are you sure to deleted this image ?")) {
                 // On envoie une requête Ajax vers le href du lien avec la méthode DELETE
                 fetch(this.getAttribute("href"), {
                     method: "DELETE",
