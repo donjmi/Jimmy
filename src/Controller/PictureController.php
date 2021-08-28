@@ -123,6 +123,7 @@ class PictureController extends AbstractController
     {
         $picture->setStatut(true);
         $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', 'Main picture successfully updated !');
 
         return $this->redirectToRoute('trick_edit', ["id" => $picture->getTricks()->getId()], Response::HTTP_SEE_OTHER);
     }
@@ -132,7 +133,7 @@ class PictureController extends AbstractController
      */
     public function pictureList(PictureRepository $pictureRepository, Trick $trick): Response
     {
-        return $this->render('picture/index2.html.twig', [
+        return $this->render('picture/index.html.twig', [
             'pictures' => $pictureRepository->findByTricks($trick),
         ]);
     }
@@ -158,6 +159,7 @@ class PictureController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+        $this->addFlash('success', 'picture successfully updated !');
 
             return $this->redirectToRoute('trick_edit', ["id" => $picture->getTricks()->getId()], Response::HTTP_SEE_OTHER);
         }
