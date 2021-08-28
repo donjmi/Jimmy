@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}New Trick{% endblock %}
+{% block title %}
+  New Trick
+{% endblock %}
 
 {% block body %}
-<div class="container align-items-center mt-5">
-<h1 class="text-muted">New Trick</h1>
+  <div class="container align-items-center mt-5 ml-3 mr-3">
+    <h1 class="text-muted">
+      New Trick
+    </h1>
     <div class="row">
-    {{ include('trick/_form.html.twig') }}
+      {{ include('trick/_form.html.twig') }}
     </div>
-</div>
+  </div>
 {% endblock %}
