@@ -95,7 +95,7 @@ class CommentController extends AbstractController
     /**
         * @Route("/delete/{id}", name="trick_comment_delete")
         */
-        public function deleteVideo(Comment $comment)
+        public function deleteComment(Comment $comment)
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
