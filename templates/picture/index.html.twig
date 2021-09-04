@@ -1,18 +1,22 @@
-{% extends 'base.html.twig' %} {% block title %} Picture list {% endblock %} {% block content %}
-<div class="col-md-12 mt-5 mb-5">
+{% extends 'base.html.twig' %} {% block title %}
+  Picture list
+{% endblock %} {% block content %}
+  <div class="col-md-12 mt-5 mb-5">
     <h1 class="text-muted h5">
-        Choice your main picture
+      Choice your main picture
     </h1>
-    {% for picture in pictures %}
     <div class="row">
-        <div class="col d-flex">
-            <div class="card mr-3" style="width: 10rem;">
-                <img class="card-img-top" src="{{ asset(
+      <div class="col d-flex">
+        {% for picture in pictures %}
+          <div class="card mr-3" style="width: 10rem;">
+            <img class="card-img-top"
+              src="{{ asset(
                 '/media/images/tricks/' ~ picture.name
-              )|imagine_filter('avatar') }}" alt="Card image cap" />
-                <div class="card-body mx-auto">
-                    <p class="card-text">
-                        <a href="{{
+              )|imagine_filter('avatar') }}"
+              alt="Card image cap" />
+            <div class="card-body mx-auto">
+              <p class="card-text">
+                <a href="{{
                   path(
                     'picture_set_main',
                     {
@@ -21,21 +25,21 @@
                     }
                   )
                   }}">
-                            <span style="font-size: 30px; color: Dodgerblue;">
-                <i class="fas fa-check-circle"></i>
-              </span>
-                        </a>
-                    </p>
-                </div>
+                  <span style="font-size: 30px; color: Dodgerblue;">
+                    <i class="fas fa-check-circle"></i>
+                  </span>
+                </a>
+              </p>
             </div>
-            {% else %}
-            <tr>
-                <td colspan="3">
-                    no records found
-                </td>
-            </tr>
-        </div>
+          </div>
+        {% else %}
+          <tr>
+            <td colspan="3">
+              no records found
+            </td>
+          </tr>
+        {% endfor %}
+      </div>
     </div>
-    {% endfor %}
-</div>
+  </div>
 {% endblock %}
