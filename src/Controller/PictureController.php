@@ -159,7 +159,7 @@ class PictureController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
-        $this->addFlash('success', 'picture successfully updated !');
+            $this->addFlash('success', 'picture successfully updated !');
 
             return $this->redirectToRoute('trick_edit', ["id" => $picture->getTricks()->getId()], Response::HTTP_SEE_OTHER);
         }
