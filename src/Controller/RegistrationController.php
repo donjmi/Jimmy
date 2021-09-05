@@ -44,6 +44,7 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('success', 'Welcome you are registred !');
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation(
