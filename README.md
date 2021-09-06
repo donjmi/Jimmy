@@ -22,7 +22,10 @@ Projet 6 du parcours PHP / Symfony sur OpenClassrooms - Développez de A à Z le
 
 3. Composer install -> pour installer toutes les dependances.
 
-4. Lancer la commande pour installer/configurer/navihuer sur le projet : composer prepare
+4. Lancer la commande pour installer/configurer/naviguer sur le projet :
+   **composer prepare**
+
+ces commandes vont être lancés pour configurer le site:
 
 - php bin/console doctrine:database:drop --if-exists --force
 - php bin/console doctrine:database:create
@@ -30,5 +33,6 @@ Projet 6 du parcours PHP / Symfony sur OpenClassrooms - Développez de A à Z le
 - php bin/console doctrine:fixtures:load -n
 
 Connectez vous sur le site:
--admin: email+1@snowtrick.com pass: 000000
-user: email+2@snowtrick.com pass: 000000
+
+- admin: email+1@snowtrick.com pass: 000000
+- user: email+2@snowtrick.com pass: 000000
