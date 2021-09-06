@@ -52,6 +52,7 @@ body {
     margin: 0;
     margin-top: 48px;
     border: none;
+    z-index: 99;
 }
 
 .alert-success {
@@ -116,9 +117,24 @@ body {
     }
     .trickBody {
         position: relative;
-        top: -100px;
+        top: -80px;
         margin-bottom: -100px;
         background-color: white;
+    }
+    .iconeUpxx {
+        position: absolute;
+        top: 50px;
+        right: 0px;
+        z-index: 99;
+        margin-right: 0px;
+        justify-content: center;
+        align-items: center;
+    }
+    .Show {
+        top: 100px;
+    }
+    .seeMedia {
+        margin-top: 100px;
     }
 }
 
@@ -176,9 +192,9 @@ body {
     position: absolute;
     top: 0px;
     right: 0px;
-    z-index: 1;
+    z-index: 99;
     margin-right: 0px;
-    margin-top: -20px;
+    /* margin-top: -20px; */
 }
 
 .trickname {
