@@ -24,9 +24,6 @@ class VideoType extends AbstractType
                         'message' => 'Url must be  Dailymotion or youtube'
                     ])
             ]
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Save'
             ]);
     }
 

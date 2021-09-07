@@ -1,4 +1,13 @@
-{{ form_start(form) }}
+{% block content %}
+  <div class="container align-items-center">
+    <h1 class="mt-5">
+      Change your url image
+    </h1>
+    {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <button class="btn btn-primary mb-3">
+      {{ button_label|default('Save') }}
+    </button>
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

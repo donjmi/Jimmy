@@ -184,7 +184,7 @@ class TrickController extends AbstractController
             $this->addFlash('info', 'Trick successfully deleted');
         }
 
-        return $this->redirectToRoute('trick_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
